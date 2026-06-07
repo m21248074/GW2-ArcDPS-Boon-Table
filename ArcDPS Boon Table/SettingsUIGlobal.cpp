@@ -66,7 +66,7 @@ void SettingsUIGlobal::Draw() {
 	if (ImGuiEx::EnumCombo(
 		langLabel.c_str(), 
 		settings.language,
-		{LanguageSetting::English, LanguageSetting::German, LanguageSetting::French, LanguageSetting::Spanish, LanguageSetting::Chinese, LanguageSetting::LikeGame},
+		{LanguageSetting::English, LanguageSetting::German, LanguageSetting::French, LanguageSetting::Spanish, LanguageSetting::Chinese, LanguageSetting::TChinese, LanguageSetting::LikeGame},
 		tooltips
 	)) {
 		auto lang = settings.language;

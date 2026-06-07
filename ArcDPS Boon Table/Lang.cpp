@@ -641,11 +641,141 @@ constexpr auto BOONTABLE_TRANSLATION_CHINESE = std::to_array({
 	u8"快捷键", // BT_SettingsGlobalShortcuts
 });
 
+constexpr auto BOONTABLE_TRANSLATION_TCHINESE = std::to_array({
+	u8"歷史紀錄", // BT_SettingsHistory,
+	u8"當前", // BT_SettingsHistoryCurrent
+	u8"在頂部顯示自己", // BT_SettingsSelfOnTop
+	u8"玩家", // BT_SettingsPlayers
+	u8"小隊", // BT_SettingsSubgroups
+	u8"全團", // BT_SettingsTotal
+	u8"恩賜(Boon)", // BT_BoonTypeBoon
+	u8"戰士(Warrior)", // BT_BoonTypeWarrior
+	u8"魂武者(Revenant)", // BT_BoonTypeRevenant
+	u8"守護者(Guardian)", // BT_BoonTypeGuardian
+	u8"工程師(Engineer)", // BT_BoonTypeEngineer
+	u8"遊俠(Ranger)", // BT_BoonTypeRanger
+	u8"元素使(Elementalist)", // BT_BoonTypeElementalist
+	u8"幻術師(Mesmer)", // BT_BoonTypeMesmer
+	u8"喚靈師(Necromancer)", // BT_BoonTypeNecromancer
+	u8"光環(Aura)", // BT_BoonTypeAura
+	u8"古物", // BT_BoonTypeRelic
+	u8"其他", // BT_BoonTypeOther
+	u8"重置欄位設定", // BT_SettingsResetTableColumns
+	u8"顯示", // BT_SettingsDisplay
+	u8"標題以文字替代圖標顯示", // BT_SettingsShowLabel
+	u8"想要顯示的行數。\n全團和小隊也算一行。\n如果你想要十人團員外加全團, 則必須將其設為'11'", // BT_SettingsMaxDisplayedPopup
+	u8"最大角色名長度", // BT_SettingsMaxPlayerLength
+	u8"著色模式", // BT_SettingsColoringMode
+	u8"將數值顯示為進度條", // BT_SettingsShowProgressBar
+	u8"僅顯示你所在的小隊", // BT_SettingsShowOnlySubgroup
+	u8"增加外部邊距(x軸)", // BT_SettingsTablePaddingX
+	u8"對齊", // BT_SettingsAlignment
+	u8"增益欄位寬度", // BT_SettingsBoonColumnWidth
+	u8"Ctrl+左鍵以手動輸入數字。", // BT_SettingsWidthSlideTooltip
+	u8"(沒有設定)", // BT_SettingsKeyNotSetText
+	u8"世界之戰(WvW)", // BT_Wvw
+	u8"增益表", // BT_WindowHeader
+	u8"角色名", // BT_NameColumnHeader
+	u8"小隊", // BT_SubgroupColumnHeader
+	u8"小隊", // BT_SubgroupNameColumnValue
+	u8"總計", // BT_TotalNameColumnValue
+	u8"全團", // BT_TotalSubgroupColumnValue
+	u8"預設(無顏色)", // BT_ColoringModeDefault
+	u8"按職業區分", // BT_ColoringModeByProfession
+	u8"按百分比變化", // BT_ColoringModeByPercentage
+	u8"增益表", // BT_ShowChart
+	u8"場戰鬥要保留", // BT_SettingsFightsToKeep
+	u8"100% 顏色", // BT_Settings100Color
+	u8"0% 顏色", // BT_Settings0Color
+	u8"自身顏色", // BT_SettingsSelfColor
+	u8"快捷鍵", // BT_SettingsShortcut
+	u8"威能(Might)", // BT_BuffMight
+	u8"激怒(Fury)", // BT_BuffFury
+	u8"再生(Regeneration)", // BT_BuffRegeneration
+	u8"保護(Protection)", // BT_BuffProtection
+	u8"急速(Quickness)", // BT_BuffQuickness
+	u8"敏捷(Alacrity)", // BT_BuffAlacrity
+	u8"決心(Resolution)", // BT_BuffResolution
+	u8"活力(Vigor)", // BT_BuffVigor
+	u8"穩固(Stability)", // BT_BuffStability
+	u8"聖盾(Aegis)", // BT_BuffAegis
+	u8"迅捷(Swiftness)", // BT_BuffSwiftness
+	u8"抗性(Resistance)", // BT_BuffResistance
+	u8"撫傷迷霧(Soothing Mist)", // BT_BuffSoothingMist
+	u8"吸血光環(Vampiric Aura)", // BT_BuffVampiricAura
+	u8"靈感紋章(Signet of Inspiration)", // BT_BuffSignetInspiration
+	u8"潛行(Stealth)", // BT_BuffStealth
+	u8"奔馳急速(Superspeed)", // BT_BuffSuperspeed
+	u8"生命值90%以上", // BT_Above90Hp
+	u8"決心紋章(Signet of Resolve)", // BT_BuffSignetResolve
+	u8"怨毒紋章(Bane Signet)", // BT_BuffSignetBane
+	u8"裁決紋章(Signet of Judgment)", // BT_BuffSignetJudgment
+	u8"仁慈紋章(Signet of Mercy)", // BT_BuffSignetMercy
+	u8"憤怒紋章(Signet of Wrath)", // BT_BuffSignetWrath
+	u8"勇氣紋章(Signet of Courage)", // BT_BuffSignetCourage
+	u8"石犛牛姿態(Dolyak Stance)", // BT_BuffDolyakStance
+	u8"獅鷲姿態(Griffon Stance)", // BT_BuffGriffonStance
+	u8"陸行鳥姿態(Moa Stance)", // BT_BuffMoaStance
+	u8"禿鷹姿態(Vulture Stance)", // BT_BuffVultureStance
+	u8"熊靈姿態(Bear Stance)", // BT_BuffBearStance
+	u8"獨狼之力(One Wolf Pack)", // BT_BuffOneWolfPack
+	u8"斷魂之峰(Soulcleave's Summit)", // BT_BuffSoulcleavesSummit
+	u8"刃爪之怒(Razorclaw's Rage)", // BT_BuffRazorclawsRage
+	u8"斷刃壁壘(Breakrazor's Bastion)", // BT_BuffBreakrazorsBastion
+	u8"混亂光環(Chaos Aura)", // BT_BuffChaosAura
+	u8"黑暗光環(Dark Aura)", // BT_BuffDarkAura
+	u8"火焰光環(Fire Aura)", // BT_BuffFireAura
+	u8"冰霜光環(Frost Aura)", // BT_BuffFrostAura
+	u8"明亮光環(Light Aura)", // BT_BuffLightAura
+	u8"磁力光環(Magnetic Aura)", // BT_BuffMagneticAura
+	u8"電擊光環(Shocking Aura)", // BT_BuffShockingAura
+	u8"靈魂倒鉤(Soul Barbs)", // BT_BuffSoulBarbs
+	u8"鬼靈鎧甲(Spectral Armor)", // BT_BuffSpectralArmor
+	u8"美德激勵(Inspiring Virtue)", // BT_BuffInspiringVirtue
+	u8"永恆綠洲(Eternal Oasis)", // BT_BuffEternalOasis
+	u8"牢固連結(Unbroken Lines)", // BT_BuffUnbrokenLines
+	u8"崇高矮人(Rite of the Great Dwarf)", // BT_BuffRiteOfTheGreatDwarf
+	u8"復仇符印(Symbolic Avenger)", // BT_BuffSymbolicAvenger
+	u8"活力壁壘(Invigorated Bulwark)", // BT_BuffInvigoratedBulwark
+	u8"團結一心(Sticking Together)", // BT_BuffStickingTogether
+	u8"嚴格定式(Rigorous Certainty)", // BT_BuffRigorousCertainty
+	u8"望族", // BT_BuffRelicAristocracy
+	u8"僧侶", // BT_BuffRelicMonk
+	u8"爭鬥者", // BT_BuffRelicBrawler
+	u8"潛行者", // BT_BuffRelicThief
+	u8"煙花", // BT_BuffRelicFireworks
+	u8"獨行俠", // BT_BuffRelicDaredevil
+	u8"神槍手", // BT_BuffRelicDeadeye
+	u8"燃火者", // BT_BuffRelicFirebrand
+	u8"預告者", // BT_BuffRelicHerald
+	u8"災厄師", // BT_BuffRelicScourge
+	u8"編織者", // BT_BuffRelicWeaver
+	u8"風裔", // BT_BuffRelicZephyrite
+	u8"萊爾", // BT_BuffRelicLyhr
+	u8"瑪邦", // BT_BuffRelicMabon
+	u8"瓦思", // BT_BuffRelicVass
+	u8"努里斯", // BT_BuffRelicNourys
+	u8"風暴詠者", // BT_BuffRelicStormsinger
+	u8"悲傷", // BT_BuffRelicSorrow
+	u8"瘟疫使者", // BT_BuffRelicBlightbringer
+	u8"克達", // BT_BuffRelicClaw
+	u8"巴里爾山", // BT_BuffRelicMountBalrior
+	u8"荊棘", // BT_BuffRelicThorns
+	u8"活體城市", // BT_BuffRelicTitanicPotential
+	u8"泰坦之魂", // BT_BuffRelicSoulOfTheTitan
+	u8"血石波動", // BT_BuffRelicBloodstoneVolatility
+	u8"血石狂熱", // BT_BuffRelicBloodstoneFervor
+	u8"如果沒安裝 unofficial extras 插件，將回退到英文版本", // BT_LikeInGameUEOnlyTooltip
+	u8"通用設置", // BT_SettingsGeneral
+	u8"快捷鍵", // BT_SettingsGlobalShortcuts
+	});
+
 static_assert(magic_enum::enum_count<LangKey>() == BOONTABLE_TRANSLATION_ENGLISH.size());
 static_assert(magic_enum::enum_count<LangKey>() == BOONTABLE_TRANSLATION_GERMAN.size());
 static_assert(magic_enum::enum_count<LangKey>() == BOONTABLE_TRANSLATION_FRENCH.size());
 static_assert(magic_enum::enum_count<LangKey>() == BOONTABLE_TRANSLATION_SPANISH.size());
 static_assert(magic_enum::enum_count<LangKey>() == BOONTABLE_TRANSLATION_CHINESE.size());
+static_assert(magic_enum::enum_count<LangKey>() == BOONTABLE_TRANSLATION_TCHINESE.size());
 
 void LoadTranslations() {
 	auto count = magic_enum::enum_count<LangKey>();
@@ -656,4 +786,5 @@ void LoadTranslations() {
 	ArcdpsExtension::Localization::instance().Load(GWL_FRE, BOONTABLE_TRANSLATION_FRENCH);
 	ArcdpsExtension::Localization::instance().Load(GWL_SPA, BOONTABLE_TRANSLATION_SPANISH);
 	ArcdpsExtension::Localization::instance().Load(GWL_CN, BOONTABLE_TRANSLATION_CHINESE);
+	ArcdpsExtension::Localization::instance().Load(GWL_TW, BOONTABLE_TRANSLATION_TCHINESE);
 }
