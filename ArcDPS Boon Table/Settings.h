@@ -5,14 +5,14 @@
 #include <string>
 #include <cstdint>
 #include <ArcdpsExtension/Localization.h>
+#include <modernIni/modernIni.h>
+#include <modernIni/modernIniMacros.h>
 
 #include "Helpers.h"
 #include "ITracker.h"
-#include "modernIni/modernIni/modernIniMacros.h"
-#include "modernIni/modernIni/modernIni.h"
 
-MODERN_INI_DEFINE_TYPE_NON_INTRUSIVE_NO_EXCEPT(ImVec2, x, y)
-MODERN_INI_DEFINE_TYPE_NON_INTRUSIVE_NO_EXCEPT(ImVec4, x, y, z, w)
+MODERN_INI_DEFINE_TYPE(ImVec2, x, y)
+MODERN_INI_DEFINE_TYPE(ImVec4, x, y, z, w)
 
 class SettingsUI;
 class SettingsUIGlobal;
@@ -26,6 +26,12 @@ class Settings {
 public:
 	Settings() = default;
 	~Settings() = default;
+
+	// delete copy/move
+	Settings(const Settings& other) = delete;
+	Settings(Settings&& other) noexcept = delete;
+	Settings& operator=(const Settings& other) = delete;
+	Settings& operator=(Settings&& other) noexcept = delete;
 
 	void readFromFile();
 	void saveToFile();
@@ -66,18 +72,14 @@ public:
 	[[nodiscard]] ImVec4 get100Color() const;
 	[[nodiscard]] ImVec4 get0Color() const;
 	[[nodiscard]] int getFightsToKeep() const;
-	[[nodiscard]] ArcdpsExtension::LanguageSetting getLanguage() const;
-	[[nodiscard]] ArcdpsExtension::LanguageSetting getGameLanguage() const;
-	void setGameLanguage(ArcdpsExtension::LanguageSetting newLanguage);
+	[[nodiscard]] const std::string& getLanguage() const;
+	[[nodiscard]] const std::string& getGameLanguage() const;
+	void setLanguage(std::string newLanguage);
+	void setGameLanguage(std::string newLanguage);
 
 	void setShowChart(int tableIndex, bool status);
 	void setCurrentHistory(int tableIndex, uint8_t currentHistory);
-
-	// delete copy/move
-	Settings(const Settings& other) = delete;
-	Settings(Settings&& other) noexcept = delete;
-	Settings& operator=(const Settings& other) = delete;
-	Settings& operator=(Settings&& other) noexcept = delete;
+	void setDefaultWindowPadding(int tableIndex, ImVec2 defaultWindowPadding);
 
 private:
 	struct Table {
@@ -105,6 +107,7 @@ private:
 		ImGuiID from_window_id;
 		int max_displayed = 0;
 		std::optional<ImVec2> window_padding;
+		ImVec2 window_padding_default = { 0.0f, 0.0f };
 		int max_player_length = 0;
 		WPARAM shortcut = 0;
 		std::string appear_as_in_option;
@@ -114,7 +117,7 @@ private:
 		bool scrollbar = true;
 		bool table_padding_x = false;
 
-		MODERN_INI_DEFINE_TYPE_INTRUSIVE_NO_EXCEPT(Table, show, show_self_on_top, show_players, show_npcs, show_subgroups, show_total, 
+		MODERN_INI_DEFINE_TYPE_INTRUSIVE(Table, show, show_self_on_top, show_players, show_npcs, show_subgroups, show_total, 
 			show_uptime_as_progress_bar, show_colored, alternating_row_bg, show_label, alignment, hide_header, sizing_policy, boon_column_width,
 			show_only_subgroup, show_background, position, corner_position, corner_vector, anchor_panel_corner_position, self_panel_corner_position,
 			from_window_id, max_displayed, window_padding, max_player_length, shortcut, appear_as_in_option, title_bar, scrollbar, table_padding_x)
@@ -124,15 +127,13 @@ private:
 	std::optional<ImVec4> _100_color;
 	std::optional<ImVec4> _0_color;
 	int fights_to_keep = 10;
-	ArcdpsExtension::LanguageSetting language = ArcdpsExtension::LanguageSetting::LikeGame;
-	ArcdpsExtension::LanguageSetting gameLanguage = ArcdpsExtension::LanguageSetting::English;
+	std::string language2 = Lang::LikeGame;
+	std::string gameLanguage = ArcdpsExtension::Lang::English;
 	
 	// Table tables[MaxTableWindowAmount]{};
 	std::array<Table, MaxTableWindowAmount> tables;
 
-	void convertFromSimpleIni(modernIni::Ini& ini);
-
-	MODERN_INI_DEFINE_TYPE_INTRUSIVE_NO_EXCEPT(Settings, self_color, _100_color, _0_color, fights_to_keep, tables, language)
+	MODERN_INI_DEFINE_TYPE_INTRUSIVE(Settings, self_color, _100_color, _0_color, fights_to_keep, tables, language2)
 };
 
 extern Settings settings;

@@ -133,13 +133,12 @@ arcdps_exports* mod_init()
 	std::expected<ArcdpsExtension::UpdateCheckerBase::Version, std::string> currentVersion = std::unexpected("Not initialized");
 	
 	try {
-		// load settings
-		settings.readFromFile();
-
 		// load translation
 		LoadTranslations();
 
-		ArcdpsExtension::Localization::instance().ChangeLanguage(static_cast<gwlanguage>(settings.getLanguage()));
+		//ArcdpsExtension::Localization::instance().ChangeLanguage(static_cast<gwlanguage>(settings.getLanguage()));
+		// load settings
+		settings.readFromFile();
 
 		// setup icon loader
 		ArcdpsExtension::IconLoader::init(self_dll, id3d11d);
@@ -167,7 +166,7 @@ arcdps_exports* mod_init()
 	std::string version;
 	if (currentVersion.has_value())
 	{
-		version = ArcdpsExtension::UpdateChecker::instance().GetVersionAsString(*currentVersion);
+		version = ArcdpsExtension::UpdateChecker::GetVersionAsString(*currentVersion);
 	}
 	else
 	{
@@ -201,16 +200,20 @@ arcdps_exports* mod_init()
 void mod_release()
 {
 	// try {
-		settings.saveToFile();
+#ifdef _DEBUG
+	SaveTranslationFile();
+#endif
 
-		if (update_state)
-		{
-			update_state->FinishPendingTasks();
-		}
-		sequencer.Shutdown();
-		ArcdpsExtension::g_singletonManagerInstance.Shutdown();
+	settings.saveToFile();
 
-		ImGuiEx::BigTable::Shutdown();
+	if (update_state)
+	{
+		update_state->FinishPendingTasks();
+	}
+	sequencer.Shutdown();
+	ArcdpsExtension::g_singletonManagerInstance.Shutdown();
+
+	ImGuiEx::BigTable::Shutdown();
 	// } catch(const std::exception& e) {
 	// 	arc_log_file("error in mod_release!");
 	// 	arc_log_file(e.what());
@@ -460,8 +463,6 @@ void mod_imgui(uint32_t not_charsel_or_loading, uint32_t hide_if_combat_or_ooc)
 
 		PRINT_LINE()
 
-		auto io = &ImGui::GetIO();
-
 		if (KeysDown::IsKeyDown(arc_global_mod1) && KeysDown::IsKeyDown(arc_global_mod2)) {
 			std::vector<int> keysPressed;
 
@@ -561,8 +562,8 @@ bool canMoveWindows()
 	}
 }
 
-void language_changed_callback(Language pNewLanguage) {
-	settings.setGameLanguage(static_cast<ArcdpsExtension::LanguageSetting>(pNewLanguage));
+extern "C" void language_changed_callback(Language pNewLanguage) {
+	settings.setGameLanguage(ArcdpsExtension::Localization::ToLangCode(pNewLanguage));
 }
 
 extern "C" __declspec(dllexport) void arcdps_unofficial_extras_subscriber_init(
