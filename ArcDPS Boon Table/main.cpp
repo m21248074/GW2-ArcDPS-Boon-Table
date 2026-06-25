@@ -136,7 +136,6 @@ arcdps_exports* mod_init()
 		// load translation
 		LoadTranslations();
 
-		//ArcdpsExtension::Localization::instance().ChangeLanguage(static_cast<gwlanguage>(settings.getLanguage()));
 		// load settings
 		settings.readFromFile();
 
