@@ -137,6 +137,8 @@ enum LangKey {
 	BT_LikeInGameUEOnlyTooltip,
 	BT_SettingsGeneral,
 	BT_SettingsGlobalShortcuts,
+	BT_SettingsColoringDefaultBg,
+	BT_BuffRelicScoundrel,
 };
 
 void LoadTranslations();

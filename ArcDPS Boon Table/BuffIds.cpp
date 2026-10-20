@@ -83,7 +83,7 @@ void init_tracked_buffs() {
     tracked_buffs.emplace_back(std::vector<uint32_t>{59592}, BT_BuffInspiringVirtue, StackingType_single, false, BoonType_Guardian, ID_Inspiring_Virtue);
     tracked_buffs.emplace_back(std::vector<uint32_t>{44871}, BT_BuffEternalOasis, StackingType_single, false, BoonType_Guardian, ID_Eternal_Oasis);
     tracked_buffs.emplace_back(std::vector<uint32_t>{43194}, BT_BuffUnbrokenLines, StackingType_single, false, BoonType_Guardian, ID_Unbroken_Lines);
-	tracked_buffs.emplace_back(std::vector<uint32_t>{26596, 33330}, BT_BuffRiteOfTheGreatDwarf, StackingType_single, false, BoonType_Revenant, ID_Rite_of_the_Great_Dwarf);
+	tracked_buffs.emplace_back(std::vector<uint32_t>{26596, 33330, 32588, 80245}, BT_BuffRiteOfTheGreatDwarf, StackingType_single, false, BoonType_Revenant, ID_Rite_of_the_Great_Dwarf);
     tracked_buffs.emplace_back(ArcdpsExtension::ET_Unknown); // "Bulwark Gyro (legacy)"
 	tracked_buffs.emplace_back(std::vector<uint32_t>{56890}, BT_BuffSymbolicAvenger, StackingType_single, false, BoonType_Guardian, ID_Symbolic_Avenger);
 	tracked_buffs.emplace_back(std::vector<uint32_t>{30207}, BT_BuffInvigoratedBulwark, StackingType_single, false, BoonType_Guardian, ID_Invigorated_Bulwark);
@@ -116,6 +116,7 @@ void init_tracked_buffs() {
     tracked_buffs.emplace_back(std::vector<uint32_t>{76351}, BT_BuffRelicSoulOfTheTitan, StackingType_single, false, BoonType_Relic, ID_Relic_SoulOfTheTitan);
     tracked_buffs.emplace_back(std::vector<uint32_t>{104800}, BT_BuffRelicBloodstoneVolatility, StackingType_intensity, false, BoonType_Relic, ID_Relic_Bloodstone);
     tracked_buffs.emplace_back(std::vector<uint32_t>{76326}, BT_BuffRelicBloodstoneFervor, StackingType_single, false, BoonType_Relic, ID_Relic_Bloodstone);
+	tracked_buffs.emplace_back(std::vector<uint32_t>{79279}, BT_BuffRelicScoundrel, StackingType_single, false, BoonType_Relic, ID_Relic_Scoundrel);
 	
 	// above 90
 	above90BoonDef = std::make_shared<BoonDef>(std::vector<uint32_t>{static_cast<uint32_t>(-1)}, BT_Above90Hp, StackingType_single, false, BoonType_other, ID_Writ_of_Masterful_Strength); // above 90% hp (e.g. scholar)

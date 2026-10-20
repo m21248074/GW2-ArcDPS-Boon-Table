@@ -25,8 +25,7 @@ const std::string& Entity::getName() const {
 	return name;
 }
 
-void Entity::applyBoon(cbtevent* ev)
-{
+void Entity::applyBoon(cbtevent* ev) {
 	if (!ev) return;
 	if (ev->value == 0) return;
 	//	if (ev->value <= ev->overstack_value) return;
@@ -34,65 +33,52 @@ void Entity::applyBoon(cbtevent* ev)
 	BoonDef* current_def = getTrackedBoon(ev->skillid);
 	if (!current_def) return;
 
-	auto current_boon_list = in_combat ? &boons_uptime : &boons_uptime_initial;
+	const auto boon_id = current_def->ids[0];
 
-	std::lock_guard<std::mutex> lock(boons_mtx);
+	const auto current_boon_list = in_combat ? &boons_uptime : &boons_uptime_initial;
 
-	auto it = current_boon_list->find(ev->skillid);
+	std::lock_guard lock(boons_mtx);
 
-	if (it != current_boon_list->end())
-	{
+	if (const auto it = current_boon_list->find(boon_id); it != current_boon_list->end()) {
 		it->second.Apply(getBuffApplyDuration(ev));
-	}
-	else
-	{
-		current_boon_list->insert({ current_def->ids[0],Boon(current_def, getBuffApplyDuration(ev)) });
+	} else {
+		current_boon_list->insert({ boon_id, Boon(current_def, getBuffApplyDuration(ev)) });
 	}
 }
 
-void Entity::removeBoon(cbtevent* ev)
-{
+void Entity::removeBoon(cbtevent* ev) {
 	if (!ev) return;
 	if (ev->value == 0) return;
 	//	if (ev->value <= ev->overstack_value) return;
-	if (!getTrackedBoon(ev->skillid)) return;
 
-	auto current_boon_list = &boons_uptime;
-	if (!in_combat)
-		current_boon_list = &boons_uptime_initial;
+	auto* current_def = getTrackedBoon(ev->skillid);
+	if (!current_def) return;
 
-	std::lock_guard<std::mutex> lock(boons_mtx);
+	auto& current_boon_list = in_combat ? boons_uptime : boons_uptime_initial;
 
-	auto it = current_boon_list->find(ev->skillid);
+	std::lock_guard lock(boons_mtx);
 
-	if (it != current_boon_list->end())
-	{
+	if (const auto it = current_boon_list.find(current_def->ids[0]); it != current_boon_list.end()) {
 		it->second.Remove(ev->value);
 	}
 }
 
-void Entity::gaveBoon(cbtevent* ev)
-{
+void Entity::gaveBoon(cbtevent* ev) {
 	if (!ev) return;
 	if (ev->value == 0) return;
 	if (ev->is_offcycle) return; //don't track boon extensions until they have a proper src
 
-	BoonDef* current_def = getTrackedBoon(ev->skillid);
+	auto* current_def = getTrackedBoon(ev->skillid);
 	if (!current_def) return;
 
-	auto current_boon_list = in_combat ? &boons_generation : &boons_generation_initial;
+	auto& current_boon_list = in_combat ? boons_generation : boons_generation_initial;
 
-	std::lock_guard<std::mutex> lock(boons_mtx);
+	std::lock_guard lock(boons_mtx);
 
-	auto it = current_boon_list->find(ev->skillid);
-
-	if (it != current_boon_list->end())
-	{
+	if (const auto it = current_boon_list.find(current_def->ids[0]); it != current_boon_list.end()) {
 		it->second.Apply(getBuffApplyDuration(ev));
-	}
-	else
-	{
-		current_boon_list->insert({ current_def->ids[0],Boon(current_def, getBuffApplyDuration(ev)) });
+	} else {
+		current_boon_list.insert({ current_def->ids[0],Boon(current_def, getBuffApplyDuration(ev)) });
 	}
 }
 
